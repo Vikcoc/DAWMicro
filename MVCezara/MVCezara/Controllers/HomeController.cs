@@ -26,5 +26,10 @@ namespace MVCezara.Controllers
 
             return View();
         }
+
+        public string Asta ()
+        {
+            return "hello word!";
+        }
     }
 }
