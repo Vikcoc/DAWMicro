@@ -131,13 +131,14 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\Comments.cs" />
+    <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\FriendshipRequest.cs" />
-    <Compile Include="Models\GroupMessages.cs" />
-    <Compile Include="Models\Groups.cs" />
-    <Compile Include="Models\Notices.cs" />
-    <Compile Include="Models\Posts.cs" />
-    <Compile Include="Models\UserGroups.cs" />
+    <Compile Include="Models\GroupMessage.cs" />
+    <Compile Include="Models\Group.cs" />
+    <Compile Include="Models\MicroContext.cs" />
+    <Compile Include="Models\Notice.cs" />
+    <Compile Include="Models\Post.cs" />
+    <Compile Include="Models\UserGroup.cs" />
     <Compile Include="Models\UserPlaceholder.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
