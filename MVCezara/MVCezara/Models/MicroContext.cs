@@ -18,7 +18,7 @@ namespace MVCezara.Models
         public virtual DbSet<UserGroup> UserGroups { get; set; }
         public virtual DbSet<UserPlaceholder> UserPlaceholders { get; set; }
 
-        public MicroContext() : base("") { }
+        public MicroContext() : base("DBConnectionString") { }
 
 
     }

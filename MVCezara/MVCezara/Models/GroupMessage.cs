@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -7,6 +8,7 @@ namespace MVCezara.Models
 {
     public class GroupMessage
     {
+        [Key]
         public int MessageId { get; set; }
         public int GroupId { get; set; }
         public int UserId { get; set; }
