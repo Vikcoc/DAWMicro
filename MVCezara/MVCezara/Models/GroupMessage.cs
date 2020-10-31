@@ -7,7 +7,7 @@ namespace MVCezara.Models
 {
     public class GroupMessage
     {
-        public int MessegeId { get; set; }
+        public int MessageId { get; set; }
         public int GroupId { get; set; }
         public int UserId { get; set; }
         public string Message { get; set; }

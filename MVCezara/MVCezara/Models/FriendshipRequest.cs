@@ -11,12 +11,13 @@ namespace MVCezara.Models
     {
         [Key,Column(Order = 0)]
         public int RequesterId { get; set; }
-        public int ReciverId { get; set; }
+        [Key,Column(Order = 1)]
+        public int ReceiverId { get; set; }
         public string Message { get; set; }
         public bool IsSeen { get; set; }
         public bool IsAccepted { get; set; }
 
         public virtual UserPlaceholder Requester { get; set; }
-        public virtual UserPlaceholder Reciver { get; set; }
+        public virtual UserPlaceholder Receiver { get; set; }
     }
 }
