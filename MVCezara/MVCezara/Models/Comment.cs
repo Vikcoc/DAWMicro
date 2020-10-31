@@ -11,7 +11,7 @@ namespace MVCezara.Models
         [Key]
         public int CommentId { get; set; }
         public int PostId { get; set; }
-        public int UserId { get; set; }
+        public int UserPlaceholderId { get; set; }
         public string Content { get; set; }
         public bool IdEdited { get; set; }
 

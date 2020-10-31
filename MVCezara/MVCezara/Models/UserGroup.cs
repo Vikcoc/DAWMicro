@@ -10,7 +10,7 @@ namespace MVCezara.Models
     public class UserGroup
     {
         [Key, Column(Order = 0)]
-        public int UserId { get; set; }
+        public int UserPlaceholderId { get; set; }
         [Key, Column(Order = 1)]
         public int GroupId { get; set; }
 

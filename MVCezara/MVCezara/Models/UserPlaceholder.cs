@@ -9,7 +9,7 @@ namespace MVCezara.Models
     public class UserPlaceholder
     {
         [Key]
-        public int UserId { get; set; }
+        public int UserPlaceholderId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public bool IsPublic { get; set; }

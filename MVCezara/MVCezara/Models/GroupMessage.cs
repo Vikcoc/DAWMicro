@@ -11,7 +11,7 @@ namespace MVCezara.Models
         [Key]
         public int MessageId { get; set; }
         public int GroupId { get; set; }
-        public int UserId { get; set; }
+        public int UserPlaceholderId { get; set; }
         public string Message { get; set; }
         public bool IsEdited { get; set; }
 

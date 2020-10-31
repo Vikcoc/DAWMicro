@@ -10,7 +10,7 @@ namespace MVCezara.Models
     {
         [Key]
         public int NoticeId { get; set; }
-        public int UserId { get; set; }
+        public int UserPlaceholderId { get; set; }
         public string Content { get; set; }
 
         public virtual UserPlaceholder UserPlaceholder { get; set; }
