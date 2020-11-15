@@ -1,0 +1,22 @@
+﻿@using MVCezara.Models
+
+@{
+    ViewBag.Title = "Show";
+}
+
+<h2>Show</h2>
+
+<h1>@ViewBag.Group.GroupName</h1>
+<h3>@ViewBag.Group.Description</h3>
+<a href="/Groups/Edit/@ViewBag.Group.GroupId">Edit</a>
+<br/>
+
+@foreach (GroupMessage message in ViewBag.Group.GroupMessages)
+{
+    <h4>@message.Message</h4>
+    if (@message.IsEdited)
+    {
+        <h6>Edited</h6>
+    }
+    <br/>
+}

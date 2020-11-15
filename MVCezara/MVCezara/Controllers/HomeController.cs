@@ -13,7 +13,6 @@ namespace MVCezara.Controllers
         private readonly MicroContext smh = new MicroContext();
         public ActionResult Index()
         {
-            Debug.WriteLine(smh.UserPlaceholders.FirstOrDefault().FirstName);
             return View();
         }
 

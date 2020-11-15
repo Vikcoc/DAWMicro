@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewBag.Title = "Edit";
+}
+
+<h2>Edit</h2>
+
+<h2>Editare grup</h2>
+<p>Afisare formular editare group</p>
+<form method="post" action="">
+    @Html.HttpMethodOverride(HttpVerbs.Put)
+    <input type="number" name="GroupId" hidden="true" value="@ViewBag.Group.GroupId"/>
+    <label>Nume grup</label>
+    <br/>
+    <input type="text" name="GroupName" value="@ViewBag.Group.GroupName"/>
+    <br/>
+    <br/>
+    <label>Descriere grup</label>
+    <br/>
+    <textarea name="Description">@ViewBag.Group.Description</textarea>
+    <br/>
+    <br/>
+    <button type="submit">Salveaza</button>
+</form>

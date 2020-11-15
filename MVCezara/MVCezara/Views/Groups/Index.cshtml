@@ -1,0 +1,22 @@
+﻿@using MVCezara.Models
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+<a href="/Groups/New">Adauga Grup</a>
+
+@foreach (Group group in ViewBag.Groups)
+{
+    <h1>@group.GroupName</h1>
+    <h2>@group.Description</h2>
+    <a href="/Groups/Show/@group.GroupId">Show</a>
+    <form method="post" action="/Groups/Delete/@group.GroupId">
+        @Html.HttpMethodOverride(HttpVerbs.Delete)
+        <button type="submit">Sterge</button>
+    </form>
+    <br/>
+    <br/>
+
+}
