@@ -1,0 +1,17 @@
+﻿
+@{
+    ViewBag.Title = "Editeaza comentariu";
+}
+
+<h2> @ViewBag.Title </h2>
+<form method="post" action="/Comments/Edit/@ViewBag.comment.CommentId">
+    @Html.HttpMethodOverride(HttpVerbs.Put)
+    <input type="hidden" name="PostId" value="@ViewBag.comment.PostId"> 
+    <input type="text" name ="Content" value="@ViewBag.comment.Content" />
+    <br />
+    <br />
+    <button class="btn btn-success" type="submit"> Editeaza comentariul </button>
+</form>
+<hr />
+<a class="btn btn-primary" href="/Posts/Show/@ViewBag.comment.PostId"> Inapoi la postare </a>   
+

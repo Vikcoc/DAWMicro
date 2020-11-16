@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewBag.Title = "Adaugare postare";
+}
+
+<h2> @ViewBag.Title </h2>
+<form method="post" action="/Posts/New">
+    <label> Continut postare </label>
+    <br />
+    <textarea name="Content"> </textarea>
+    <br />
+
+    <button class="btn btn-success"> Adauga postare </button>
+</form>
+<hr />
+<a class="btn btn-primary" href ="/Posts/Index"> Inapoi la lista de postari </a>
