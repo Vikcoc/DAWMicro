@@ -1,123 +1,121 @@
-﻿namespace MVCezara.Migrations
+﻿using System.Data.Entity.Migrations;
+
+namespace MVCezara.Migrations
 {
-    using System;
-    using System.Data.Entity.Migrations;
-    
     public partial class Initial : DbMigration
     {
         public override void Up()
         {
             CreateTable(
-                "dbo.Comments",
-                c => new
+                    "dbo.Comments",
+                    c => new
                     {
-                        CommentId = c.Int(nullable: false, identity: true),
-                        PostId = c.Int(nullable: false),
-                        UserPlaceholderId = c.Int(nullable: false),
+                        CommentId = c.Int(false, true),
+                        PostId = c.Int(false),
+                        UserPlaceholderId = c.Int(false),
                         Content = c.String(),
-                        IdEdited = c.Boolean(nullable: false),
+                        IdEdited = c.Boolean(false)
                     })
                 .PrimaryKey(t => t.CommentId)
                 .ForeignKey("dbo.Posts", t => t.PostId)
                 .ForeignKey("dbo.UserPlaceholders", t => t.UserPlaceholderId)
                 .Index(t => t.PostId)
                 .Index(t => t.UserPlaceholderId);
-            
+
             CreateTable(
-                "dbo.Posts",
-                c => new
+                    "dbo.Posts",
+                    c => new
                     {
-                        PostId = c.Int(nullable: false, identity: true),
-                        UserPlaceholderId = c.Int(nullable: false),
+                        PostId = c.Int(false, true),
+                        UserPlaceholderId = c.Int(false),
                         Content = c.String(),
-                        IsEdited = c.Boolean(nullable: false),
+                        IsEdited = c.Boolean(false)
                     })
                 .PrimaryKey(t => t.PostId)
                 .ForeignKey("dbo.UserPlaceholders", t => t.UserPlaceholderId)
                 .Index(t => t.UserPlaceholderId);
-            
+
             CreateTable(
-                "dbo.UserPlaceholders",
-                c => new
+                    "dbo.UserPlaceholders",
+                    c => new
                     {
-                        UserPlaceholderId = c.Int(nullable: false, identity: true),
+                        UserPlaceholderId = c.Int(false, true),
                         FirstName = c.String(),
                         LastName = c.String(),
-                        IsPublic = c.Boolean(nullable: false),
-                        Bio = c.String(),
+                        IsPublic = c.Boolean(false),
+                        Bio = c.String()
                     })
                 .PrimaryKey(t => t.UserPlaceholderId);
-            
+
             CreateTable(
-                "dbo.GroupMessages",
-                c => new
+                    "dbo.GroupMessages",
+                    c => new
                     {
-                        MessageId = c.Int(nullable: false, identity: true),
-                        GroupId = c.Int(nullable: false),
-                        UserPlaceholderId = c.Int(nullable: false),
+                        MessageId = c.Int(false, true),
+                        GroupId = c.Int(false),
+                        UserPlaceholderId = c.Int(false),
                         Message = c.String(),
-                        IsEdited = c.Boolean(nullable: false),
+                        IsEdited = c.Boolean(false)
                     })
                 .PrimaryKey(t => t.MessageId)
                 .ForeignKey("dbo.Groups", t => t.GroupId)
                 .ForeignKey("dbo.UserPlaceholders", t => t.UserPlaceholderId)
                 .Index(t => t.GroupId)
                 .Index(t => t.UserPlaceholderId);
-            
+
             CreateTable(
-                "dbo.Groups",
-                c => new
+                    "dbo.Groups",
+                    c => new
                     {
-                        GroupId = c.Int(nullable: false, identity: true),
+                        GroupId = c.Int(false, true),
                         GroupName = c.String(),
                         Description = c.String(),
-                        CreationDate = c.DateTime(nullable: false),
+                        CreationDate = c.DateTime(false)
                     })
                 .PrimaryKey(t => t.GroupId);
-            
+
             CreateTable(
-                "dbo.UserGroups",
-                c => new
+                    "dbo.UserGroups",
+                    c => new
                     {
-                        UserPlaceholderId = c.Int(nullable: false),
-                        GroupId = c.Int(nullable: false),
+                        UserPlaceholderId = c.Int(false),
+                        GroupId = c.Int(false)
                     })
-                .PrimaryKey(t => new { t.UserPlaceholderId, t.GroupId })
+                .PrimaryKey(t => new {t.UserPlaceholderId, t.GroupId})
                 .ForeignKey("dbo.Groups", t => t.GroupId)
                 .ForeignKey("dbo.UserPlaceholders", t => t.UserPlaceholderId)
                 .Index(t => t.UserPlaceholderId)
                 .Index(t => t.GroupId);
-            
+
             CreateTable(
-                "dbo.Notices",
-                c => new
+                    "dbo.Notices",
+                    c => new
                     {
-                        NoticeId = c.Int(nullable: false, identity: true),
-                        UserPlaceholderId = c.Int(nullable: false),
-                        Content = c.String(),
+                        NoticeId = c.Int(false, true),
+                        UserPlaceholderId = c.Int(false),
+                        Content = c.String()
                     })
                 .PrimaryKey(t => t.NoticeId)
                 .ForeignKey("dbo.UserPlaceholders", t => t.UserPlaceholderId)
                 .Index(t => t.UserPlaceholderId);
-            
+
             CreateTable(
-                "dbo.FriendshipRequests",
-                c => new
+                    "dbo.FriendshipRequests",
+                    c => new
                     {
-                        RequesterId = c.Int(nullable: false),
-                        ReceiverId = c.Int(nullable: false),
+                        RequesterId = c.Int(false),
+                        ReceiverId = c.Int(false),
                         Message = c.String(),
-                        IsSeen = c.Boolean(nullable: false),
-                        IsAccepted = c.Boolean(nullable: false),
+                        IsSeen = c.Boolean(false),
+                        IsAccepted = c.Boolean(false)
                     })
-                .PrimaryKey(t => new { t.RequesterId, t.ReceiverId })
+                .PrimaryKey(t => new {t.RequesterId, t.ReceiverId})
                 .ForeignKey("dbo.UserPlaceholders", t => t.ReceiverId)
                 .ForeignKey("dbo.UserPlaceholders", t => t.RequesterId)
                 .Index(t => t.RequesterId)
                 .Index(t => t.ReceiverId);
-            
         }
-        
+
         public override void Down()
         {
             DropForeignKey("dbo.FriendshipRequests", "RequesterId", "dbo.UserPlaceholders");
@@ -130,16 +128,16 @@
             DropForeignKey("dbo.GroupMessages", "GroupId", "dbo.Groups");
             DropForeignKey("dbo.Comments", "UserPlaceholderId", "dbo.UserPlaceholders");
             DropForeignKey("dbo.Comments", "PostId", "dbo.Posts");
-            DropIndex("dbo.FriendshipRequests", new[] { "ReceiverId" });
-            DropIndex("dbo.FriendshipRequests", new[] { "RequesterId" });
-            DropIndex("dbo.Notices", new[] { "UserPlaceholderId" });
-            DropIndex("dbo.UserGroups", new[] { "GroupId" });
-            DropIndex("dbo.UserGroups", new[] { "UserPlaceholderId" });
-            DropIndex("dbo.GroupMessages", new[] { "UserPlaceholderId" });
-            DropIndex("dbo.GroupMessages", new[] { "GroupId" });
-            DropIndex("dbo.Posts", new[] { "UserPlaceholderId" });
-            DropIndex("dbo.Comments", new[] { "UserPlaceholderId" });
-            DropIndex("dbo.Comments", new[] { "PostId" });
+            DropIndex("dbo.FriendshipRequests", new[] {"ReceiverId"});
+            DropIndex("dbo.FriendshipRequests", new[] {"RequesterId"});
+            DropIndex("dbo.Notices", new[] {"UserPlaceholderId"});
+            DropIndex("dbo.UserGroups", new[] {"GroupId"});
+            DropIndex("dbo.UserGroups", new[] {"UserPlaceholderId"});
+            DropIndex("dbo.GroupMessages", new[] {"UserPlaceholderId"});
+            DropIndex("dbo.GroupMessages", new[] {"GroupId"});
+            DropIndex("dbo.Posts", new[] {"UserPlaceholderId"});
+            DropIndex("dbo.Comments", new[] {"UserPlaceholderId"});
+            DropIndex("dbo.Comments", new[] {"PostId"});
             DropTable("dbo.FriendshipRequests");
             DropTable("dbo.Notices");
             DropTable("dbo.UserGroups");

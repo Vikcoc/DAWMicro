@@ -1,16 +1,14 @@
-﻿using MVCezara.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System;
 using System.Web.Mvc;
+using MVCezara.Models;
 
 namespace MVCezara.Controllers
 {
     public class PostsController : Controller
     {
         // GET: Posts
-        private MicroContext db = new MicroContext();
+        private readonly MicroContext db = new MicroContext();
+
         public ActionResult Index()
         {
             ViewBag.posts = db.Posts;
@@ -21,7 +19,7 @@ namespace MVCezara.Controllers
         {
             ViewBag.post = db.Posts.Find(id);
             return View();
-        } 
+        }
 
         public ActionResult New()
         {
@@ -41,14 +39,14 @@ namespace MVCezara.Controllers
         {
             ViewBag.post = db.Posts.Find(id);
             return View();
-        } 
+        }
 
         [HttpPut]
         public ActionResult Edit(int id, Post post)
         {
             try
             {
-                Post oldPost = db.Posts.Find(id);
+                var oldPost = db.Posts.Find(id);
                 if (TryUpdateModel(oldPost))
                 {
                     oldPost.Content = post.Content;
@@ -66,11 +64,10 @@ namespace MVCezara.Controllers
         [HttpDelete]
         public ActionResult Delete(int id)
         {
-            Post post = db.Posts.Find(id);
+            var post = db.Posts.Find(id);
             db.Posts.Remove(post);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
-
     }
 }

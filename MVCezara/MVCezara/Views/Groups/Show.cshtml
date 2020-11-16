@@ -1,5 +1,4 @@
 ﻿@using MVCezara.Models
-
 @{
     ViewBag.Title = "Show";
 }
@@ -14,7 +13,7 @@
 @foreach (GroupMessage message in ViewBag.Group.GroupMessages)
 {
     <h4>@message.Message</h4>
-    if (@message.IsEdited)
+    if (message.IsEdited)
     {
         <h6>Edited</h6>
     }

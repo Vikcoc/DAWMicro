@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
 
 namespace MVCezara.Models
 {
     public class UserPlaceholder
     {
-        [Key]
-        public int UserPlaceholderId { get; set; }
+        [Key] public int UserPlaceholderId { get; set; }
+
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public bool IsPublic { get; set; }

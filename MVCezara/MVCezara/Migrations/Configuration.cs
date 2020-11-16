@@ -1,11 +1,9 @@
-﻿namespace MVCezara.Migrations
-{
-    using System;
-    using System.Data.Entity;
-    using System.Data.Entity.Migrations;
-    using System.Linq;
+﻿using System.Data.Entity.Migrations;
+using MVCezara.Models;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<MVCezara.Models.MicroContext>
+namespace MVCezara.Migrations
+{
+    internal sealed class Configuration : DbMigrationsConfiguration<MicroContext>
     {
         public Configuration()
         {
@@ -14,7 +12,7 @@
             ContextKey = "MVCezara.MicroContext";
         }
 
-        protected override void Seed(MVCezara.Models.MicroContext context)
+        protected override void Seed(MicroContext context)
         {
             //  This method will be called after migrating to the latest version.
 

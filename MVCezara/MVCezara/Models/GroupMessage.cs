@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Web;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace MVCezara.Models
 {
     public class GroupMessage
     {
-        [Key]
-        public int MessageId { get; set; }
+        [Key] public int MessageId { get; set; }
+
         public int GroupId { get; set; }
         public int UserPlaceholderId { get; set; }
         public string Message { get; set; }

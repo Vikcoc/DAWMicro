@@ -1,16 +1,12 @@
-﻿using MVCezara.Models;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
+using MVCezara.Models;
 
 namespace MVCezara.Controllers
 {
     public class HomeController : Controller
     {
         private readonly MicroContext smh = new MicroContext();
+
         public ActionResult Index()
         {
             return View();

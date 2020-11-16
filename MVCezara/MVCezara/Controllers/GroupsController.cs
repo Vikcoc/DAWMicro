@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Linq;
 using System.Web.Mvc;
-using System.Web.Routing;
 using MVCezara.Models;
 
 namespace MVCezara.Controllers
@@ -11,6 +9,7 @@ namespace MVCezara.Controllers
     {
         // GET: Group
         private readonly MicroContext _context = new MicroContext();
+
         public ActionResult Index()
         {
             ViewBag.Groups = _context.Groups.ToList();
@@ -51,17 +50,20 @@ namespace MVCezara.Controllers
                 var dbGroup = _context.Groups.Find(group.GroupId);
 
                 if (!TryUpdateModel(dbGroup))
-                    return RedirectToAction("Edit", new { id = group.GroupId});
+                    return RedirectToAction("Edit", new {id = group.GroupId});
 
-                dbGroup.GroupName = @group.GroupName;
-                dbGroup.Description = @group.Description;
+                if (dbGroup != null)
+                {
+                    dbGroup.GroupName = @group.GroupName;
+                    dbGroup.Description = @group.Description;
+                }
 
                 _context.SaveChanges();
-                return RedirectToAction("Show", new { id = group.GroupId });
+                return RedirectToAction("Show", new {id = group.GroupId});
             }
             catch (Exception)
             {
-                return RedirectToAction("Show", new { id = group.GroupId });
+                return RedirectToAction("Show", new {id = group.GroupId});
             }
         }
 
@@ -69,7 +71,7 @@ namespace MVCezara.Controllers
         public ActionResult Delete(int id)
         {
             var group = _context.Groups.Find(id);
-            if(group != null)
+            if (group != null)
                 _context.Groups.Remove(group);
             _context.SaveChanges();
             return RedirectToAction("Index");

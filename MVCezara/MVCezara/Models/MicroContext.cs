@@ -1,18 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
-using System.Linq;
-using System.Web;
+using MVCezara.Migrations;
 
 namespace MVCezara.Models
 {
     public class MicroContext : DbContext
     {
-
         public MicroContext() : base("DBConnectionString")
         {
-            Database.SetInitializer(new MigrateDatabaseToLatestVersion<MicroContext, MVCezara.Migrations.Configuration>("DBConnectionString"));
+            Database.SetInitializer(
+                new MigrateDatabaseToLatestVersion<MicroContext, Configuration>("DBConnectionString"));
         }
 
         public virtual DbSet<Comment> Comments { get; set; }

@@ -1,15 +1,12 @@
-﻿using MVCezara.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+﻿using System;
 using System.Web.Mvc;
+using MVCezara.Models;
 
 namespace MVCezara.Controllers
 {
     public class CommentsController : Controller
     {
-        private MicroContext db = new MicroContext();
+        private readonly MicroContext db = new MicroContext();
 
         // GET: Comments
         public ActionResult Index()
@@ -29,7 +26,7 @@ namespace MVCezara.Controllers
         [HttpDelete]
         public ActionResult Delete(int id)
         {
-            Comment comment = db.Comments.Find(id);
+            var comment = db.Comments.Find(id);
             db.Comments.Remove(comment);
             db.SaveChanges();
             return Redirect("/Posts/Show/" + comment.PostId);
@@ -46,8 +43,8 @@ namespace MVCezara.Controllers
         {
             try
             {
-                Comment oldComment = db.Comments.Find(id);
-                if(TryUpdateModel(oldComment))
+                var oldComment = db.Comments.Find(id);
+                if (TryUpdateModel(oldComment))
                 {
                     oldComment.Content = comment.Content;
                     db.SaveChanges();
@@ -55,7 +52,7 @@ namespace MVCezara.Controllers
 
                 return Redirect("/Posts/Show/" + comment.PostId);
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return Redirect("/Posts/Show/" + comment.PostId);
             }

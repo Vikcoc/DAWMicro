@@ -1,14 +1,13 @@
-﻿
-@{
+﻿@{
     ViewBag.Title = "Editeaza postarea";
 }
 
 <h2> @ViewBag.Title </h2>
 <form method="post" action="/Posts/Edit/@ViewBag.post.PostId">
     @Html.HttpMethodOverride(HttpVerbs.Put)
-    <label> Continut </label> <br />
-    <input type="text" name="Content" value="@ViewBag.post.Content"> <br />  <br />
+    <label> Continut </label> <br/>
+    <input type="text" name="Content" value="@ViewBag.post.Content"> <br/> <br/>
     <button class="btn btn-success" type="submit"> Editeaza postarea </button>
 </form>
-<hr />
+<hr/>
 <a class="btn btn-primary" href="/Posts/Index"> Inapoi la lista de postari </a>
