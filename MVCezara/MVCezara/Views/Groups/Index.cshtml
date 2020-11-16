@@ -10,11 +10,14 @@
 {
     <h1>@group.GroupName</h1>
     <h2>@group.Description</h2>
-    <a href="/Groups/Show/@group.GroupId">Show</a>
-    <form method="post" action="/Groups/Delete/@group.GroupId">
-        @Html.HttpMethodOverride(HttpVerbs.Delete)
-        <button type="submit">Sterge</button>
-    </form>
+    <div>
+        <a class="btn btn-primary" href="/Groups/Show/@group.GroupId">Show</a>
+        <form class ="pull-right" method="post" action="/Groups/Delete/@group.GroupId">
+            @Html.HttpMethodOverride(HttpVerbs.Delete)
+            <button type="submit" class="btn-danger">Sterge</button>
+        </form>
+
+    </div>
     <br/>
     <br/>
 }
