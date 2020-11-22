@@ -1,21 +1,23 @@
 ﻿@{
     ViewBag.Title = "New";
 }
+@model MVCezara.Models.Group
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
 
 <h2>New</h2>
 
 <h2>Creare grup</h2>
-<p>Afisare formular creare group</p>
+<hr />
 <form method="post" action="">
-    <label>Nume grup</label>
-    <br/>
-    <input type="text" name="GroupName"/>
-    <br/>
-    <br/>
-    <label>Descriere grup</label>
-    <br/>
-    <textarea name="Description"></textarea>
-    <br/>
-    <br/>
-    <button type="submit">Adauga grup</button>
+    @Html.LabelFor(x => x.GroupName, "Nume Grup")
+    <br />
+    @Html.TextBoxFor(x => x.GroupName, null, new { @class = "form-control" })
+    @Html.ValidationMessageFor(x => x.GroupName,null, new {@class = "text-danger"})
+    <br />
+    @Html.LabelFor(x => x.Description, "Nume Grup")
+    <br />
+    @Html.TextAreaFor(x => x.Description, new { @class = "form-control" })
+    <br />
+    <button class="btn btn-success" type="submit">Adauga grup</button>
 </form>

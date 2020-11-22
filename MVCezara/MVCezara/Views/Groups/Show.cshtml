@@ -1,24 +1,42 @@
-﻿@using MVCezara.Models
+﻿@model MVCezara.Models.Group
 @{
     ViewBag.Title = "Show";
 }
 
 <h2>Show</h2>
 <div class="container-fluid bg-info" style="margin-top: 20px; padding-bottom: 15px">
-    <h1>@ViewBag.Group.GroupName</h1>
-    <h3>@ViewBag.Group.Description</h3>
-    <a href="/Groups/Edit/@ViewBag.Group.GroupId" class="btn btn-info">Edit</a>
+    <h1>@Model.GroupName</h1>
+    <h3>@Model.Description</h3>
+    <a href="/Groups/Edit/@Model.GroupId" class="btn btn-info">Edit</a>
 </div>
 <hr />
 
-@foreach (GroupMessage message in ViewBag.Group.GroupMessages)
+@foreach (var message in Model.GroupMessages)
 {
-    <div class="container-fluid bg-success" style="margin-top: 20px;">
-        <h4>@message.Message</h4>
-        @if (message.IsEdited)
-        {
-            <h6 class="pull-right">Edited</h6>
-        }
-        <hr />
+    @*<div class="container-fluid bg-success" style="margin-top: 20px;">
+            <h4>@message.Message</h4>
+            @if (message.IsEdited)
+            {
+                <h6 class="pull-right">Edited</h6>
+            }
+            <hr />
+        </div>*@
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2"></div>
+            <div class="col-md-8 bg-success">
+                <div>
+                    <div style="text-align: center">@message.Message</div>
+                    @if (message.IsEdited)
+                    {
+                        <div class="pull-right" style="display: inline-block; float: left; margin-right: 15px">
+                            <div class="glyphicon glyphicon-asterisk"></div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+        <div class="col-md-2"></div>
     </div>
 }
