@@ -28,8 +28,10 @@ namespace MVCezara.Controllers
         [HttpPost]
         public ActionResult New(Group group)
         {
-            group.CreationDate = DateTime.UtcNow;
-            _context.Groups.Add(group);
+            if (!ModelState.IsValid)
+                return RedirectToAction("New");
+            @group.CreationDate = DateTime.UtcNow;
+            _context.Groups.Add(@group);
             _context.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -49,26 +51,30 @@ namespace MVCezara.Controllers
         [HttpPut]
         public ActionResult Edit(Group group)
         {
-            try
+            if (ModelState.IsValid)
             {
-                var dbGroup = _context.Groups.Find(group.GroupId);
-
-                if (!TryUpdateModel(dbGroup))
-                    return RedirectToAction("Edit", new {id = group.GroupId});
-
-                if (dbGroup != null)
+                try
                 {
-                    dbGroup.GroupName = @group.GroupName;
-                    dbGroup.Description = @group.Description;
-                }
+                    var dbGroup = _context.Groups.Find(group.GroupId);
 
-                _context.SaveChanges();
-                return RedirectToAction("Show", new {id = group.GroupId});
+                    if (!TryUpdateModel(dbGroup))
+                        return RedirectToAction("Edit", new {id = group.GroupId});
+
+                    if (dbGroup != null)
+                    {
+                        dbGroup.GroupName = @group.GroupName;
+                        dbGroup.Description = @group.Description;
+                    }
+
+                    _context.SaveChanges();
+                    return RedirectToAction("Show", new {id = group.GroupId});
+                }
+                catch (Exception)
+                {
+                    return RedirectToAction("Show", new {id = group.GroupId});
+                }
             }
-            catch (Exception)
-            {
-                return RedirectToAction("Show", new {id = group.GroupId});
-            }
+            return RedirectToAction("Show", new { id = group.GroupId });
         }
 
         [HttpDelete]

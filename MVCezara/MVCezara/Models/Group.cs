@@ -6,9 +6,11 @@ namespace MVCezara.Models
 {
     public class Group
     {
-        [Key] public int GroupId { get; set; }
-
+        [Key]
+        public int GroupId { get; set; }
+        [Required(ErrorMessage = "Name is required")]
         public string GroupName { get; set; }
+        [DataType(DataType.MultilineText)]
         public string Description { get; set; }
         public DateTime CreationDate { get; set; }
 
