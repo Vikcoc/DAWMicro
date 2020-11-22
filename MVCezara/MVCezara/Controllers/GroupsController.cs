@@ -12,6 +12,10 @@ namespace MVCezara.Controllers
 
         public ActionResult Index()
         {
+            if (TempData.ContainsKey("message"))
+            {
+                ViewBag.message = TempData["message"].ToString();
+            }
             ViewBag.Groups = _context.Groups.ToList();
             return View();
         }
@@ -32,14 +36,14 @@ namespace MVCezara.Controllers
 
         public ActionResult Show(int id)
         {
-            ViewBag.Group = _context.Groups.Include("GroupMessages").FirstOrDefault(x => x.GroupId == id);
-            return View();
+            var group = _context.Groups.Include("GroupMessages").FirstOrDefault(x => x.GroupId == id);
+            return View(group);
         }
 
         public ActionResult Edit(int id)
         {
-            ViewBag.Group = _context.Groups.Find(id);
-            return View();
+            var group = _context.Groups.Find(id);
+            return View(group);
         }
 
         [HttpPut]
@@ -72,8 +76,10 @@ namespace MVCezara.Controllers
         {
             var group = _context.Groups.Find(id);
             if (group != null)
+            {
                 _context.Groups.Remove(group);
-            _context.SaveChanges();
+                TempData["message"] = "Grupul cu numele: " + group.GroupName + " a fost sters";
+            }            _context.SaveChanges();
             return RedirectToAction("Index");
         }
     }

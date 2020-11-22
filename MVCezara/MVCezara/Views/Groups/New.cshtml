@@ -5,17 +5,15 @@
 <h2>New</h2>
 
 <h2>Creare grup</h2>
-<p>Afisare formular creare group</p>
+<hr/>
 <form method="post" action="">
-    <label>Nume grup</label>
-    <br/>
-    <input type="text" name="GroupName"/>
-    <br/>
-    <br/>
-    <label>Descriere grup</label>
-    <br/>
-    <textarea name="Description"></textarea>
-    <br/>
-    <br/>
-    <button type="submit">Adauga grup</button>
+    @Html.Label("GroupName", "Nume Grup")
+    <br />
+    @Html.TextBox("GroupName", null, new { @class = "form-control" })
+    <br />
+    @Html.Label("Description", "Nume Grup")
+    <br />
+    @Html.TextArea("Description",null, new { @class = "form-control" })
+    <br />
+    <button class="btn btn-success" type="submit">Adauga grup</button>
 </form>
