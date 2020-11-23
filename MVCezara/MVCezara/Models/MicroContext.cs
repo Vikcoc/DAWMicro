@@ -8,8 +8,8 @@ namespace MVCezara.Models
     {
         public MicroContext() : base("DBConnectionString")
         {
-            Database.SetInitializer(
-                new MigrateDatabaseToLatestVersion<MicroContext, Configuration>("DBConnectionString"));
+            Database.SetInitializer(new MigrateDatabaseToLatestVersion<MicroContext,
+            MVCezara.Migrations.Configuration>("DBConnectionString"));
         }
 
         public virtual DbSet<Comment> Comments { get; set; }
@@ -21,9 +21,9 @@ namespace MVCezara.Models
         public virtual DbSet<UserGroup> UserGroups { get; set; }
         public virtual DbSet<UserPlaceholder> UserPlaceholders { get; set; }
 
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
-        {
-            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
-        }
+        //protected override void OnModelCreating(DbModelBuilder modelBuilder)
+       // {
+         //   modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+        //}
     }
 }

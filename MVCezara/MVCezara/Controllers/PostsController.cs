@@ -12,17 +12,26 @@ namespace MVCezara.Controllers
         public ActionResult Index()
         {
             ViewBag.posts = db.Posts;
+            if (TempData.ContainsKey("message"))
+            {
+                ViewBag.message = TempData["message"];
+            }
             return View();
         }
 
         public ActionResult Show(int id)
         {
-            ViewBag.post = db.Posts.Find(id);
-            return View();
+            Post post = db.Posts.Find(id);
+            if(TempData.ContainsKey("message"))
+            {
+                ViewBag.message = TempData["message"];
+            }
+            return View(post);
         }
 
         public ActionResult New()
         {
+            Post post = new Post();
             return View();
         }
 
@@ -32,13 +41,14 @@ namespace MVCezara.Controllers
             post.UserPlaceholderId = 1;
             db.Posts.Add(post);
             db.SaveChanges();
+            TempData["message"] = "Postarea a fost adaugata cu succes!";
             return RedirectToAction("Index");
         }
 
         public ActionResult Edit(int id)
         {
-            ViewBag.post = db.Posts.Find(id);
-            return View();
+            Post post = db.Posts.Find(id);
+            return View(post);
         }
 
         [HttpPut]
@@ -53,11 +63,12 @@ namespace MVCezara.Controllers
                     db.SaveChanges();
                 }
 
-                return RedirectToAction("Index");
+                TempData["message"] = "Postarea a fost editata cu succes!";
+                return RedirectToAction("Show", new { id = id });
             }
             catch (Exception e)
             {
-                return RedirectToAction("Index");
+                return RedirectToAction("Show", new { id = id });
             }
         }
 

@@ -1,24 +1,25 @@
-﻿@{
+﻿@model MVCezara.Models.Post
+@{
     ViewBag.Title = "Afisare postare";
 }
 
 <h2> @ViewBag.Title </h2>
-
+<p> @ViewBag.message </p>
 <div class="panel panel-default">
     <div class="panel-body">
-        <p> @ViewBag.post.Content </p>
-        <hr/>
-        <a class="btn btn-primary pull-left" href="/Posts/Edit/@ViewBag.post.PostId"> Editeaza postarea </a>
-        <form method="post" action="/Posts/Delete/@ViewBag.post.PostId">
+        <p> @Model.Content </p>
+        <hr />
+        <a class="btn btn-primary pull-left" href="/Posts/Edit/@Model.PostId"> Editeaza postarea </a>
+        <form method="post" action="/Posts/Delete/@Model.PostId">
             @Html.HttpMethodOverride(HttpVerbs.Delete)
             <button class="btn btn-danger pull-right" type="submit"> Sterge postarea </button>
         </form>
     </div>
 </div>
 
-<hr/>
-<br/>
-@foreach (var comm in ViewBag.post.Comments)
+<hr />
+<br />
+@foreach (var comm in @Model.Comments)
 {
     <div class="container">
         <div class="row">
@@ -40,7 +41,7 @@
         </div>
         <div class="col-md-2"></div>
     </div>
-    <hr/>
+    <hr />
 }
 
 
@@ -52,13 +53,13 @@
             <div class="panel">
                 <form method="post" action="/Comments/New">
                     <div class="panel-body">
-                        <input type="hidden" name="PostId" value="@ViewBag.post.PostId"/>
-                        <input type="hidden" name="IdEdited" value="false"/>
+                        <input type="hidden" name="PostId" value="@Model.PostId" />
+                        <input type="hidden" name="IdEdited" value="false" />
 
                         <label>Continut comentariu</label>
-                        <br/>
+                        <br />
                         <textarea class="form-control" name="Content"></textarea>
-                        <br/>
+                        <br />
                         <button class="btn btn-success " type="submit">Adauga comentariu</button>
                     </div>
                 </form>
@@ -67,6 +68,6 @@
         <div class="col-md-2"></div>
     </div>
 </div>
-<hr/>
+<hr />
 
 <a class="btn btn-primary" href="/Posts/Index"> Inapoi la lista de postari </a>
