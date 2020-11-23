@@ -13,7 +13,7 @@ namespace MVCezara.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "202010311320366_Initial"; }
+            get { return "202011231010158_Initial"; }
         }
         
         string IMigrationMetadata.Source
