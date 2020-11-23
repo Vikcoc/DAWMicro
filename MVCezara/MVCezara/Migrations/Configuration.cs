@@ -7,7 +7,7 @@ namespace MVCezara.Migrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = true;
+            AutomaticMigrationsEnabled = false;
             AutomaticMigrationDataLossAllowed = true;
             ContextKey = "MVCezara.MicroContext";
         }

@@ -23,7 +23,11 @@ namespace MVCezara.Models
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+            //modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
+            modelBuilder.Entity<Comment>()
+                .HasOptional(x => x.UserPlaceholder)
+                .WithMany()
+                .WillCascadeOnDelete(false);
         }
     }
 }
