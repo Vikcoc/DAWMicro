@@ -17,5 +17,7 @@ namespace MVCezara.Models
         public virtual ICollection<Notice> Notices { get; set; }
         public virtual ICollection<Post> Posts { get; set; }
         public virtual ICollection<Comment> Comments { get; set; }
+        public virtual ICollection<FriendshipRequest> Requested { get; set; }
+        public virtual ICollection<FriendshipRequest> Received { get; set; }
     }
 }

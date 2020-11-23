@@ -28,6 +28,14 @@ namespace MVCezara.Models
                 .HasOptional(x => x.UserPlaceholder)
                 .WithMany()
                 .WillCascadeOnDelete(false);
+            modelBuilder.Entity<FriendshipRequest>()
+                .HasOptional(x => x.Receiver)
+                .WithMany(x => x.Received)
+                .WillCascadeOnDelete(false);
+            modelBuilder.Entity<FriendshipRequest>()
+                .HasRequired(x => x.Requester)
+                .WithMany(x => x.Requested)
+                .WillCascadeOnDelete(true);
         }
     }
 }

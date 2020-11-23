@@ -142,6 +142,10 @@
     <Compile Include="Migrations\202011231629327_validari.designer.cs">
       <DependentUpon>202011231629327_validari.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202011231857394_friendship.cs" />
+    <Compile Include="Migrations\202011231857394_friendship.designer.cs">
+      <DependentUpon>202011231857394_friendship.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\FriendshipRequest.cs" />
@@ -228,6 +232,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202011231629327_validari.resx">
       <DependentUpon>202011231629327_validari.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011231857394_friendship.resx">
+      <DependentUpon>202011231857394_friendship.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
