@@ -18,9 +18,24 @@ namespace MVCezara.Controllers
         public ActionResult New(Comment comment)
         {
             comment.UserPlaceholderId = 1;
-            db.Comments.Add(comment);
-            db.SaveChanges();
-            return Redirect("/Posts/Show/" + comment.PostId);
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    db.Comments.Add(comment);
+                    db.SaveChanges();
+                    return Redirect("/Posts/Show/" + comment.PostId);
+                }
+                else
+                {
+                    return Redirect("/Posts/Show/" + comment.PostId);
+                }
+                
+            }
+            catch(Exception e)
+            {
+                return Redirect("/Posts/Show/" + comment.PostId);
+            } 
         }
 
         [HttpDelete]
@@ -34,8 +49,8 @@ namespace MVCezara.Controllers
 
         public ActionResult Edit(int id)
         {
-            ViewBag.comment = db.Comments.Find(id);
-            return View();
+            Comment comment = db.Comments.Find(id);
+            return View(comment);
         }
 
         [HttpPut]

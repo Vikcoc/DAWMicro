@@ -138,6 +138,10 @@
     <Compile Include="Migrations\202011231010158_Initial.designer.cs">
       <DependentUpon>202011231010158_Initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202011231629327_validari.cs" />
+    <Compile Include="Migrations\202011231629327_validari.designer.cs">
+      <DependentUpon>202011231629327_validari.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Comment.cs" />
     <Compile Include="Models\FriendshipRequest.cs" />
@@ -151,6 +155,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="App_Data\MyDataBase.mdf" />
+    <Content Include="App_Data\MyDataBase_log.ldf">
+      <DependentUpon>MyDataBase.mdf</DependentUpon>
+    </Content>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
@@ -213,12 +221,13 @@
     <Content Include="Scripts\jquery-3.3.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.3.1.min.map" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <EmbeddedResource Include="Migrations\202011231010158_Initial.resx">
       <DependentUpon>202011231010158_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202011231629327_validari.resx">
+      <DependentUpon>202011231629327_validari.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

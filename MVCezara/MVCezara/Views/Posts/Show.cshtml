@@ -51,18 +51,18 @@
         </div>
         <div class="col-md-8">
             <div class="panel">
-                <form method="post" action="/Comments/New">
-                    <div class="panel-body">
-                        <input type="hidden" name="PostId" value="@Model.PostId" />
-                        <input type="hidden" name="IdEdited" value="false" />
+                @using (Html.BeginForm(actionName: "New", controllerName: "Comments"))
+                {
+                    @Html.HiddenFor(m => m.PostId, Model.PostId)
+                    @Html.HiddenFor(m => m.IsEdited, false)
 
-                        <label>Continut comentariu</label>
-                        <br />
-                        <textarea class="form-control" name="Content"></textarea>
-                        <br />
-                        <button class="btn btn-success " type="submit">Adauga comentariu</button>
-                    </div>
-                </form>
+                    @Html.Label("Content", "Continut comentariu") <br />
+                    @Html.TextBox("Content", "", new { @class = "form-control" }) <br />
+                    @Html.ValidationMessage("Content", null, new { @class = "text-danger " })
+                    <br />
+
+                    <button class="btn btn-success" type="submit"> Adauga postarea </button>
+                }
             </div>
         </div>
         <div class="col-md-2"></div>

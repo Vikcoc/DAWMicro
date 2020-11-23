@@ -10,6 +10,7 @@ namespace MVCezara.Models
 
         [ForeignKey("UserPlaceholder")] public int UserPlaceholderId { get; set; }
 
+        [Required (ErrorMessage = "Continutul postarii este obligatoriu!")]
         public string Content { get; set; }
         public bool IsEdited { get; set; }
 

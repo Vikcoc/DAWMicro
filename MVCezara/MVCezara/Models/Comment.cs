@@ -8,6 +8,8 @@ namespace MVCezara.Models
 
         public int PostId { get; set; }
         public int UserPlaceholderId { get; set; }
+
+        [Required (ErrorMessage = "Continutul comentariului este obligatoriu!")]
         public string Content { get; set; }
         public bool IdEdited { get; set; }
 

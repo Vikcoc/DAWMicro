@@ -32,17 +32,33 @@ namespace MVCezara.Controllers
         public ActionResult New()
         {
             Post post = new Post();
-            return View();
+            return View(post);
         }
 
         [HttpPost]
         public ActionResult New(Post post)
         {
             post.UserPlaceholderId = 1;
-            db.Posts.Add(post);
-            db.SaveChanges();
-            TempData["message"] = "Postarea a fost adaugata cu succes!";
-            return RedirectToAction("Index");
+            post.IsEdited = false;
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    db.Posts.Add(post);
+                    db.SaveChanges();
+                    TempData["message"] = "Postarea a fost adaugata cu succes!";
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return View(post);
+                }
+            }
+            catch (Exception e)
+            {
+                return View(post);
+            }
+                
         }
 
         public ActionResult Edit(int id)
@@ -56,19 +72,27 @@ namespace MVCezara.Controllers
         {
             try
             {
-                var oldPost = db.Posts.Find(id);
-                if (TryUpdateModel(oldPost))
+                if (ModelState.IsValid)
                 {
-                    oldPost.Content = post.Content;
-                    db.SaveChanges();
+                    Post oldPost = db.Posts.Find(id);
+
+                    if (TryUpdateModel(oldPost))
+                    {
+                        oldPost.Content = post.Content;
+                        db.SaveChanges();
+                        TempData["message"] = "Postarea a fost editata cu succes";
+                    }
+                    return Redirect("/Posts/Show/" + post.PostId);
+                }
+                else
+                {
+                    return View(post);
                 }
 
-                TempData["message"] = "Postarea a fost editata cu succes!";
-                return RedirectToAction("Show", new { id = id });
             }
             catch (Exception e)
             {
-                return RedirectToAction("Show", new { id = id });
+                return View(post);
             }
         }
 
@@ -78,6 +102,7 @@ namespace MVCezara.Controllers
             var post = db.Posts.Find(id);
             db.Posts.Remove(post);
             db.SaveChanges();
+            TempData["message"] = "Postarea a fost stearsa cu succes!";
             return RedirectToAction("Index");
         }
     }
