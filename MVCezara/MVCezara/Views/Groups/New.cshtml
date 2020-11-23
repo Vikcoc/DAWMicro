@@ -13,11 +13,12 @@
     @Html.LabelFor(x => x.GroupName, "Nume Grup")
     <br />
     @Html.TextBoxFor(x => x.GroupName, null, new { @class = "form-control" })
-    @Html.ValidationMessageFor(x => x.GroupName,null, new {@class = "text-danger"})
+    @Html.ValidationMessageFor(x => x.GroupName, null, new { @class = "text-danger" })
     <br />
-    @Html.LabelFor(x => x.Description, "Nume Grup")
+    @Html.LabelFor(x => x.Description, "Descriere Grup")
     <br />
     @Html.TextAreaFor(x => x.Description, new { @class = "form-control" })
     <br />
     <button class="btn btn-success" type="submit">Adauga grup</button>
+    <a class="btn btn-info pull-right" href="/Groups/Index">Back to groups</a>
 </form>

@@ -16,6 +16,7 @@ namespace MVCezara.Controllers
             {
                 ViewBag.message = TempData["message"].ToString();
             }
+
             ViewBag.Groups = _context.Groups.ToList();
             return View();
         }
@@ -28,17 +29,26 @@ namespace MVCezara.Controllers
         [HttpPost]
         public ActionResult New(Group group)
         {
-            if (!ModelState.IsValid)
-                return RedirectToAction("New");
-            @group.CreationDate = DateTime.UtcNow;
-            _context.Groups.Add(@group);
-            _context.SaveChanges();
-            return RedirectToAction("Index");
+            try
+            {
+                if (!ModelState.IsValid)
+                    return View(group);
+                @group.CreationDate = DateTime.UtcNow;
+                _context.Groups.Add(@group);
+                _context.SaveChanges();
+                return RedirectToAction("Index");
+            }
+            catch (Exception e)
+            {
+                return View(group);
+            }
         }
 
         public ActionResult Show(int id)
         {
             var group = _context.Groups.Include("GroupMessages").FirstOrDefault(x => x.GroupId == id);
+            if (group == null)
+                return RedirectToAction("Index");
             return View(group);
         }
 
@@ -51,30 +61,29 @@ namespace MVCezara.Controllers
         [HttpPut]
         public ActionResult Edit(Group group)
         {
-            if (ModelState.IsValid)
+            try
             {
-                try
+                if (!ModelState.IsValid)
+                    return View(group);
+                var dbGroup = _context.Groups.Find(group.GroupId);
+
+                if (!TryUpdateModel(dbGroup))
+                    return View(group);
+
+                if (dbGroup != null)
                 {
-                    var dbGroup = _context.Groups.Find(group.GroupId);
-
-                    if (!TryUpdateModel(dbGroup))
-                        return RedirectToAction("Edit", new {id = group.GroupId});
-
-                    if (dbGroup != null)
-                    {
-                        dbGroup.GroupName = @group.GroupName;
-                        dbGroup.Description = @group.Description;
-                    }
-
-                    _context.SaveChanges();
-                    return RedirectToAction("Show", new {id = group.GroupId});
+                    dbGroup.GroupName = @group.GroupName;
+                    dbGroup.Description = @group.Description;
                 }
-                catch (Exception)
-                {
-                    return RedirectToAction("Show", new {id = group.GroupId});
-                }
+
+                _context.SaveChanges();
+                return RedirectToAction("Show", new {id = group.GroupId});
             }
-            return RedirectToAction("Show", new { id = group.GroupId });
+            catch (Exception)
+            {
+                return RedirectToAction("Show", new {id = group.GroupId});
+            }
+
         }
 
         [HttpDelete]

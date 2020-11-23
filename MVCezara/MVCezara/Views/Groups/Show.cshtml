@@ -8,20 +8,12 @@
     <h1>@Model.GroupName</h1>
     <h3>@Model.Description</h3>
     <a href="/Groups/Edit/@Model.GroupId" class="btn btn-info">Edit</a>
+    <a class="btn btn-success pull-right" href="/Groups/Index">Back to groups</a>
 </div>
 <hr />
 
 @foreach (var message in Model.GroupMessages)
 {
-    @*<div class="container-fluid bg-success" style="margin-top: 20px;">
-            <h4>@message.Message</h4>
-            @if (message.IsEdited)
-            {
-                <h6 class="pull-right">Edited</h6>
-            }
-            <hr />
-        </div>*@
-
     <div class="container">
         <div class="row">
             <div class="col-md-2"></div>
